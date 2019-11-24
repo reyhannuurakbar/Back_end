@@ -24,7 +24,7 @@
     @if(count($pesanan) >0 )
       @foreach($pesanan -> all() as $book)
     <tr class="table-active">
-      <th>{{$book->id_pemesanan}}</th>
+      <th>{{$book->id_pesanan}}</th>
       <td>{{$book->id_user}}</td>
       <td>{{$book->id_restoran}}</td>
       <td>{{$book->jam}}</td>

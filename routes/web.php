@@ -19,8 +19,12 @@
 // Route::get('/','RegistrasiController@home');
 Route::get('/', 'HomeUserController@HomeUser');
 Route::get('/Pesan', 'PesananController@Pesen');
-//admin
 Route::POST('/insertpesanan','PesananController@add');
+
+//admin
+Route::get('/admin', 'AdminController@Home');
+Route::get('/accepted/{id_pesanan}', 'AdminController@accepted');
+Route::get('/deny/{id_pesanan}', 'AdminController@deny');
 
 Auth::routes();
 
