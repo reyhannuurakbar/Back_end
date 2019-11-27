@@ -71,7 +71,8 @@ class AdminController extends Controller
       );
       $accepted = pesanan::where('id_pesanan',$id_pemesanan)->update($data);
       $pesanan = pesanan::all();
-      return view('admin.admin', ['pesanan' => $pesanan]);
+      $User = User::all();
+      return view('admin.admin', ['pesanan' => $pesanan], ['User' => $User]);
     }
     public function deny($id_pemesanan){
       $data = array(
@@ -79,6 +80,7 @@ class AdminController extends Controller
       );
       $deny = pesanan::where('id_pesanan',$id_pemesanan)->update($data);
       $pesanan = pesanan::all();
-      return view('admin.admin', ['pesanan' => $pesanan]);
+      $User = User::all();
+      return view('admin.admin', ['pesanan' => $pesanan], ['User' => $User]);
     }
 }
