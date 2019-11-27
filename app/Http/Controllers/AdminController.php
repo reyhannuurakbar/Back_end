@@ -26,15 +26,15 @@ class AdminController extends Controller
       // $data_restoran itu digunakan buat ngebandingin id nanti nya setiap restoran sama admin
       $data_restoran = [
         [
-          "id" => 1,
+          "id" => 2,
           "name" => "Hanamasa"
         ],
         [
-          "id" => 2,
+          "id" => 3,
           "name" => "Shabuhaci"
         ],
         [
-          "id" => 3,
+          "id" => 4,
           "name" => "Bamboo Dimsum"
         ]
       ];
@@ -66,20 +66,72 @@ class AdminController extends Controller
 
     // fungsi restoran
     public function accepted($id_pemesanan){
+      $user_id = Auth::user()->id;
       $data = array(
         'status' => "Accepted"
       );
+      $data_restoran = [
+        [
+          "id" => 2,
+          "name" => "Hanamasa"
+        ],
+        [
+          "id" => 3,
+          "name" => "Shabuhaci"
+        ],
+        [
+          "id" => 4,
+          "name" => "Bamboo Dimsum"
+        ]
+      ];
       $accepted = pesanan::where('id_pesanan',$id_pemesanan)->update($data);
-      $pesanan = pesanan::all();
+      if($user_id == 1){
+          $pesanan = pesanan::all();
+      }
+      else {
+        // code...
+        foreach ($data_restoran as $restoran) {
+          if ($restoran['id'] == $user_id) {
+            $pesanan = pesanan::where('id_restoran', $user_id)->get();
+          }
+        }
+      }
+      // $pesanan = pesanan::all();
       $User = User::all();
       return view('admin.admin', ['pesanan' => $pesanan], ['User' => $User]);
     }
     public function deny($id_pemesanan){
+      $user_id = Auth::user()->id;
       $data = array(
         'status' => "Deny"
       );
+      $data_restoran = [
+        [
+          "id" => 2,
+          "name" => "Hanamasa"
+        ],
+        [
+          "id" => 3,
+          "name" => "Shabuhaci"
+        ],
+        [
+          "id" => 4,
+          "name" => "Bamboo Dimsum"
+        ]
+      ];
       $deny = pesanan::where('id_pesanan',$id_pemesanan)->update($data);
-      $pesanan = pesanan::all();
+      if($user_id == 1){
+          $pesanan = pesanan::all();
+      }
+      else {
+        // code...
+        foreach ($data_restoran as $restoran) {
+          if ($restoran['id'] == $user_id) {
+            $pesanan = pesanan::where('id_restoran', $user_id)->get();
+          }
+        }
+      }
+      // $pesanan = pesanan::all();
       $User = User::all();
       return view('admin.admin', ['pesanan' => $pesanan], ['User' => $User]);
     }
