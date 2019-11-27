@@ -23,7 +23,9 @@
                   </div>
                 @endforeach
               @endif
-
+              <!-- value dari id restoran itu nanti diganti berdasarkan id restoran yang dimasukin -->
+              <!-- untuk saat ini gw masukin value 1 sampe 3 karena akun user yang gw buat itu 3 user yang bisa jadi admin -->
+              <!-- intinya ganti value nya nanti berdasarkan id nya nanti -->
               <div class="form-group col-md-6">
                 <select name="restoran" class="form-control" id="exampleSelect1" required>
                   <option value="" disabled hidden selected>Restourant *</option>

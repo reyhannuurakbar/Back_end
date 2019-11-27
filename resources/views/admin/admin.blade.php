@@ -7,12 +7,14 @@
 
 </head>
 <body>
-
+  <!-- nama restoran harus dihapus -->
+  <!-- ganti id_user jadi nama user -->
   <table class="table table-hover">
   <thead>
     <tr>
       <th scope="col">ID Pemesanan</th>
       <th scope="col">Nama Pemesan</th>
+      <!-- nama restoran perlu ga perlu sii -->
       <th scope="col">Nama Restoran</th>
       <th scope="col">Jam Pesanan</th>
       <th scope="col">Jumlah Pemesan</th>
@@ -22,12 +24,17 @@
     </tr>
   </thead>
   <tbody>
+    <!-- ini yang dirubah -->
     @if(count($pesanan) >0 )
       @foreach($pesanan -> all() as $book)
+        @foreach($User ->all() as $user)
+          @if($book->id_user == $user->id)
     <tr class="table-active">
       <th>{{$book->id_pesanan}}</th>
-      <td>{{$book->id_user}}</td>
-      <td>{{$book->id_restoran}}</td>
+      <!-- gw ngambil nama user karena kita buat dalam 1 tabel -->
+      <td>{{$user->name}}</td>
+      <!-- buat nampilin nama restoran nya di tarik dengan cara auth -->
+      <td>{{ Auth::user()->name }}</td>
       <td>{{$book->jam}}</td>
       <td>{{$book->jumlah}}</td>
       <td>{{$book->tanggal}}</td>
@@ -37,6 +44,8 @@
         <a href='{{url("/deny/{$book->id_pesanan}")}}' class="alert alert-danger">Deny</a>
       </td>
     </tr>
+          @endif
+        @endforeach
       @endforeach
     @endif
   </tbody>

@@ -28,15 +28,22 @@
         <tbody>
           @if(count($pesanan) >0 )
             @foreach($pesanan -> all() as $book)
+              @foreach($User ->all() as $user)
+                @if($book->id_user == $user->id)
           <tr class="table-active">
             <th>{{$book->id_pesanan}}</th>
-            <td>{{$book->id_user}}</td>
-            <td>{{$book->id_restoran}}</td>
+            <!-- make auth biar simple -->
+            <!-- klo ga make nama pemesan juga gapapa di halaman user mah -->
+            <td>{{ Auth::user()->name }}</td>
+            <!-- sama kayak halaman admin di tarik nama dari tabel user karena admin maupun user di set di tabel yang sama -->
+            <td>{{$user->name}}</td>
             <td>{{$book->jam}}</td>
             <td>{{$book->jumlah}}</td>
             <td>{{$book->tanggal}}</td>
             <td>{{$book->status}}</td>
           </tr>
+                @endif
+              @endforeach
             @endforeach
           @endif
         </tbody>
