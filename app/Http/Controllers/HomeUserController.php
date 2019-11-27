@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\pesanan;
+use Auth;
 
 class HomeUserController extends Controller
 {
@@ -12,9 +13,16 @@ class HomeUserController extends Controller
     {
         $this->middleware('auth');
     }
-
+    //nampilin data + dataterakhir
     public function HomeUser(){
-      $pesanan = pesanan::all();
-      return view('user.user', ['pesanan' => $pesanan]);
+      $user_id = Auth::user()->id;
+      //$pesanan = pesanan::all();
+      // ini buat total pesanan berdasarkan id
+      $pesanan = pesanan::where('id_user', $user_id)->get();
+      // fungsi last pesanan
+      $last = pesanan::where('id_user', $user_id)->orderBy('id_pesanan', 'DESC')->first();
+      return view('user.user', ['pesanan' => $pesanan], ['last' => $last]);
     }
+
+
 }

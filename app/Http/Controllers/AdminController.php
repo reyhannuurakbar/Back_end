@@ -8,15 +8,15 @@ use App\User;
 
 class AdminController extends Controller
 {
-    //
-
+    // ini buat admin restoran
+    // nampilin data pesanan
     public function Home(){
       $pesanan = pesanan::all();
       $User = User::all();
       return view('admin.admin', ['pesanan' => $pesanan], ['User' => $User]);
     }
 
-
+    // fungsi restoran
     public function accepted($id_pemesanan){
       $data = array(
         'status' => "Accepted"

@@ -15,16 +15,19 @@
 //     return view('signin_temp');
 // });
 
-//user
+// User
 // Route::get('/','RegistrasiController@home');
 Route::get('/', 'HomeUserController@HomeUser');
 Route::get('/Pesan', 'PesananController@Pesen');
 Route::POST('/insertpesanan','PesananController@add');
 
-//admin
+// Admin restoran
 Route::get('/admin', 'AdminController@Home');
 Route::get('/accepted/{id_pesanan}', 'AdminController@accepted');
 Route::get('/deny/{id_pesanan}', 'AdminController@deny');
+
+// admin beneran
+Route::get('/adminbeneran', 'AdminbController@Home');
 
 Auth::routes();
 
